@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.sql.Date" %>
+<%@ page import="java.lang.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
@@ -61,33 +63,28 @@
                     <h1>日记<small>__过往</small></h1>
                 </div>
                 <div class="col-md-12">
-                        <c:forEach items="${blogList}" var ="blog">
-                            <div class="col-md-1">
-                                <!--时间-->
-                                <div class="date"><span>十二</span>10</div>
-                            </div>
-                            <div class="col-md-11">
-                                <div class="panel panel-default">
-                                    <div class="panel-body">
-                                        <div class="col-lg-12" >
-                                            <div class="panel-body">
-                                                    ${blog.content}<br/>
-                                                <span class="pull-right">
-                                                    <input type="hidden" id="datezz" value=${blog.pubDate}>
-                                                    <c:set var="date" value="${blog.pubDate}" scope="application"></c:set>
-                                                    <%
-                                                        String date = application.getAttribute("totalCount");
-                                                    %>
-                                                    <i class="fa fa-clock-o">&nbsp;&nbsp;${fn:split(results.biddingAmount,".")[0]}</i>&nbsp;&nbsp;
-                                                    <i class="fa fa-eye">&nbsp;&nbsp;2333</i>&nbsp;&nbsp;
-                                                    <i class="fa fa-comments">&nbsp;&nbsp;770</i>&nbsp;&nbsp;
-                                        </span>
-                                            </div>
+                    <c:forEach items="${blogList}" var ="blog">
+                        <c:set var="date" value="${blog.pubDate}" scope="application"></c:set>
+                        <%
+                            Date date = (Date) application.getAttribute("date");
+                            String[] s = date.toString().split("-");
+                        %>
+                        <div class="col-md-1">
+                            <!--时间-->
+                            <div class="date"><span><%=s[1]%></span><%=s[2]%></div>
+                        </div>
+                        <div class="col-md-11">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="col-lg-12" >
+                                        <div class="panel-body">
+                                                ${blog.content}<br/>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </c:forEach>
+                        </div>
+                    </c:forEach>
                 </div>
             </div>
         </div>

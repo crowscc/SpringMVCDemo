@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,6 +34,10 @@ public class MainController {
     public String index(ModelMap modelMap){
         List<BlogEntity> blogList = blogRepository.findAll();
         modelMap.addAttribute("blogList", blogList);
+        List<Date> dateList = new ArrayList<>();
+        for (BlogEntity blog:blogList) {
+            dateList.add(blog.getPubDate());
+        }
         return "index";
     }
 

@@ -51,7 +51,8 @@ function showtime()
     document.getElementById('clock').innerHTML = year+1900 + "年" + month + "月" + date + "日 " + strDate +" " + hour + ":" + minute + ":" + second;
     setTimeout("showtime();", 1000);
 }
-function animate(){
-    strs = document.getElementById('datezz').value;
-    document.getElementById('zzzzz').innerHTML = strs.split("-")[1];
+function out()
+{
+    var name = '<%=s[1]%>';
+    if (name.isEqual("03")) ;
 }
