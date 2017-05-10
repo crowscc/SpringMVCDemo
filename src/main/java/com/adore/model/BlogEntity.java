@@ -10,7 +10,6 @@ import java.sql.Date;
 @Table(name = "blog", schema = "springmvc", catalog = "")
 public class BlogEntity {
     private int id;
-    private String title;
     private String content;
     private Date pubDate;
     private UserEntity userByUserId;
@@ -23,16 +22,6 @@ public class BlogEntity {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    @Basic
-    @Column(name = "title", nullable = false, length = 100)
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     @Basic
@@ -63,7 +52,6 @@ public class BlogEntity {
         BlogEntity that = (BlogEntity) o;
 
         if (id != that.id) return false;
-        if (title != null ? !title.equals(that.title) : that.title != null) return false;
         if (content != null ? !content.equals(that.content) : that.content != null) return false;
         if (pubDate != null ? !pubDate.equals(that.pubDate) : that.pubDate != null) return false;
 
@@ -73,7 +61,6 @@ public class BlogEntity {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (content != null ? content.hashCode() : 0);
         result = 31 * result + (pubDate != null ? pubDate.hashCode() : 0);
         return result;

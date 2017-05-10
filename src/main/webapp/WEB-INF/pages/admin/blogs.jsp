@@ -46,7 +46,6 @@
         <table class="table table-bordered table-striped">
             <tr>
                 <th>ID</th>
-                <th>标题</th>
                 <th>作者</th>
                 <th>发布日期</th>
                 <th>操作</th>
@@ -55,7 +54,7 @@
             <c:forEach items="${blogList}" var="blog">
                 <tr>
                     <td>${blog.id}</td>
-                    <td>${blog.title}</td>
+                    <td>${blog.content}</td>
                     <td>${blog.userByUserId.nickname}, ${blog.userByUserId.firstName} ${blog.userByUserId.lastName}</td>
                     <td><fmt:formatDate value="${blog.pubDate }" pattern="yyyy-MM-dd"/></td>
                     <td>

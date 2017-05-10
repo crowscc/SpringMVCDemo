@@ -1,0 +1,36 @@
+@charset "utf-8";
+.date {
+    background: url("../img/calendar.gif") no-repeat scroll 0 0 transparent;
+    color: #666666;
+    float: left;
+    font: 25px/125% Arial,Helvetica，sans-serif;
+    height: 50px;
+    padding: 0 2px 0 0;
+    text-align: center;
+    width: 45px;
+}
+.date span {
+    color: #FFFFFF;
+    display: block;
+    font: 12px Arial,Helvetica,sans-serif;
+    height: 16px;
+    padding-top: 6px;
+    text-align: center;
+}
+.test_box {
+    width: 400px;
+    min-height: 120px;
+    max-height: 500px;
+    _height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3px;
+    outline: 0;
+    border: 1px solid #a0b3d6;
+    font-size: 12px;
+    word-wrap: break-word;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-user-modify: read-write-plaintext-only;
+}
+

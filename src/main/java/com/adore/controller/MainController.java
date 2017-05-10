@@ -1,6 +1,8 @@
 package com.adore.controller;
 
+import com.adore.model.BlogEntity;
 import com.adore.model.UserEntity;
+import com.adore.repository.BlogRepository;
 import com.adore.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,9 +24,14 @@ public class MainController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    BlogRepository blogRepository;
+
     //get请求 主页面
     @RequestMapping(value = "/",method = RequestMethod.GET)
-    public String index(){
+    public String index(ModelMap modelMap){
+        List<BlogEntity> blogList = blogRepository.findAll();
+        modelMap.addAttribute("blogList", blogList);
         return "index";
     }
 
