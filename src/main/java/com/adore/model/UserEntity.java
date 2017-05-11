@@ -4,16 +4,16 @@ import javax.persistence.*;
 import java.util.Collection;
 
 /**
- * Created by Crow on 17/5/8.
+ * Created by adore on 17/5/11.
  */
 @Entity
-@Table(name = "user", schema = "springmvc", catalog = "")
+@Table(name = "user", schema = "springdemo", catalog = "")
 public class UserEntity {
     private int id;
     private String nickname;
     private String password;
-    private String firstName;
-    private String lastName;
+    private String email;
+    private Byte privacy;
     private Collection<BlogEntity> blogsById;
 
     @Id
@@ -47,23 +47,23 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "first_name", nullable = true, length = 45)
-    public String getFirstName() {
-        return firstName;
+    @Column(name = "email", nullable = false, length = 45)
+    public String getEmail() {
+        return email;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Basic
-    @Column(name = "last_name", nullable = true, length = 45)
-    public String getLastName() {
-        return lastName;
+    @Column(name = "privacy", nullable = false)
+    public Byte getPrivacy() {
+        return privacy;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setPrivacy(Byte privacy) {
+        this.privacy = privacy;
     }
 
     @Override
@@ -76,8 +76,8 @@ public class UserEntity {
         if (id != that.id) return false;
         if (nickname != null ? !nickname.equals(that.nickname) : that.nickname != null) return false;
         if (password != null ? !password.equals(that.password) : that.password != null) return false;
-        if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
-        if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
+        if (email != null ? !email.equals(that.email) : that.email != null) return false;
+        if (privacy != null ? !privacy.equals(that.privacy) : that.privacy != null) return false;
 
         return true;
     }
@@ -87,8 +87,8 @@ public class UserEntity {
         int result = id;
         result = 31 * result + (nickname != null ? nickname.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (privacy != null ? privacy.hashCode() : 0);
         return result;
     }
 

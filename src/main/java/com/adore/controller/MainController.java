@@ -34,10 +34,6 @@ public class MainController {
     public String index(ModelMap modelMap){
         List<BlogEntity> blogList = blogRepository.findAll();
         modelMap.addAttribute("blogList", blogList);
-        List<Date> dateList = new ArrayList<>();
-        for (BlogEntity blog:blogList) {
-            dateList.add(blog.getPubDate());
-        }
         return "index";
     }
 
@@ -91,16 +87,16 @@ public class MainController {
         return "admin/updateUser";
     }
 
-    // 更新用户信息 操作
-    @RequestMapping(value = "/admin/users/updateP", method = RequestMethod.POST)
-    public String updateUserPost(@ModelAttribute("userP") UserEntity user) {
-
-        // 更新用户信息
-        userRepository.updateUser(user.getNickname(), user.getFirstName(),
-                user.getLastName(), user.getPassword(), user.getId());
-        userRepository.flush(); // 刷新缓冲区
-        return "redirect:/admin/users";
-    }
+//    // 更新用户信息 操作
+//    @RequestMapping(value = "/admin/users/updateP", method = RequestMethod.POST)
+//    public String updateUserPost(@ModelAttribute("userP") UserEntity user) {
+//
+//        // 更新用户信息
+//        userRepository.updateUser(user.getNickname(), user.getFirstName(),
+//                user.getLastName(), user.getPassword(), user.getId());
+//        userRepository.flush(); // 刷新缓冲区
+//        return "redirect:/admin/users";
+//    }
 
     //删除用户
     @RequestMapping(value = "/admin/users/delete/{id}", method = RequestMethod.GET)

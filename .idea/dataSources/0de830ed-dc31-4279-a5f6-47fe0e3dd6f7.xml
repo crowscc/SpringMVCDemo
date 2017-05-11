@@ -1,54 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataSource name="defaultPersistenceUnit/Hibernate">
+<dataSource name="springdemo@localhost">
   <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
     <root id="1"/>
     <schema id="2" parent="1" name="springdemo">
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
-    <schema id="3" parent="1" name="information_schema"/>
-    <schema id="4" parent="1" name="mysql"/>
-    <schema id="5" parent="1" name="performance_schema"/>
-    <schema id="6" parent="1" name="sys"/>
-    <schema id="7" parent="1" name="sakila"/>
-    <schema id="8" parent="1" name="springmvc"/>
-    <schema id="9" parent="1" name="world"/>
-    <table id="10" parent="2" name="blog"/>
-    <table id="11" parent="2" name="user"/>
-    <column id="12" parent="10" name="id">
+    <schema id="3" parent="1" name="bolg"/>
+    <schema id="4" parent="1" name="incomp"/>
+    <schema id="5" parent="1" name="information_schema"/>
+    <schema id="6" parent="1" name="jsp"/>
+    <schema id="7" parent="1" name="mysql"/>
+    <schema id="8" parent="1" name="oracle"/>
+    <schema id="9" parent="1" name="performance_schema"/>
+    <schema id="10" parent="1" name="s"/>
+    <schema id="11" parent="1" name="sys"/>
+    <schema id="12" parent="1" name="urpspider"/>
+    <schema id="13" parent="1" name="wuzhidb"/>
+    <schema id="14" parent="1" name="wzdailydb"/>
+    <schema id="15" parent="1" name="xscj"/>
+    <table id="16" parent="2" name="blog"/>
+    <table id="17" parent="2" name="user"/>
+    <column id="18" parent="16" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="13" parent="10" name="content">
+    <column id="19" parent="16" name="content">
       <Position>2</Position>
-      <DataType>varchar(255)|0</DataType>
+      <DataType>longtext|0</DataType>
     </column>
-    <column id="14" parent="10" name="user_id">
+    <column id="20" parent="16" name="user_id">
       <Position>3</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="15" parent="10" name="pub_date">
+    <column id="21" parent="16" name="pub_date">
       <Position>4</Position>
-      <DataType>date|0</DataType>
+      <DataType>timestamp|0</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
-    <index id="16" parent="10" name="user_id_idx">
+    <index id="22" parent="16" name="user_id_idx">
       <ColNames>user_id</ColNames>
     </index>
-    <key id="17" parent="10" name="PRIMARY">
+    <key id="23" parent="16" name="PRIMARY">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="18" parent="10" name="FKpxk2jtysqn41oop7lvxcp6dqq">
+    <foreign-key id="24" parent="16" name="FKpxk2jtysqn41oop7lvxcp6dqq">
       <ColNames>user_id</ColNames>
       <RefSchemaName>springdemo</RefSchemaName>
       <RefTableName>user</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="19" parent="10" name="user_id">
+    <foreign-key id="25" parent="16" name="user_id">
       <ColNames>user_id</ColNames>
       <RefSchemaName>springdemo</RefSchemaName>
       <RefTableName>user</RefTableName>
@@ -56,31 +63,33 @@
       <OnUpdate>no-action</OnUpdate>
       <OnDelete>no-action</OnDelete>
     </foreign-key>
-    <column id="20" parent="11" name="id">
+    <column id="26" parent="17" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="21" parent="11" name="nickname">
+    <column id="27" parent="17" name="nickname">
       <Position>2</Position>
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="22" parent="11" name="password">
+    <column id="28" parent="17" name="password">
       <Position>3</Position>
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="23" parent="11" name="first_name">
+    <column id="29" parent="17" name="email">
       <Position>4</Position>
       <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
     </column>
-    <column id="24" parent="11" name="last_name">
+    <column id="30" parent="17" name="privacy">
       <Position>5</Position>
-      <DataType>varchar(45)|0</DataType>
+      <DataType>tinyint(4)|0</DataType>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
     </column>
-    <key id="25" parent="11" name="PRIMARY">
+    <key id="31" parent="17" name="PRIMARY">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>

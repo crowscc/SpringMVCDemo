@@ -34,3 +34,11 @@
     -webkit-user-modify: read-write-plaintext-only;
 }
 
+.note_content {
+    font-size: 14px;
+    line-height: 25px;
+    overflow: hidden;
+    padding-left: 10px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}

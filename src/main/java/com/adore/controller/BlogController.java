@@ -79,7 +79,7 @@ public class BlogController {
     public String updateBlogP(@ModelAttribute("blogP") BlogEntity blogEntity) {
         // 更新博客信息
         blogRepository.updateBlog(blogEntity.getUserByUserId().getId(),
-                blogEntity.getContent(), blogEntity.getPubDate(), blogEntity.getId());
+                blogEntity.getContent(), blogEntity.getId());
         blogRepository.flush();
         return "redirect:/admin/blogs";
     }

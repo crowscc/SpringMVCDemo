@@ -1,17 +1,17 @@
 package com.adore.model;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
- * Created by Crow on 17/5/8.
+ * Created by adore on 17/5/11.
  */
 @Entity
-@Table(name = "blog", schema = "springmvc", catalog = "")
+@Table(name = "blog", schema = "springdemo", catalog = "")
 public class BlogEntity {
     private int id;
     private String content;
-    private Date pubDate;
+    private Timestamp pubDate;
     private UserEntity userByUserId;
 
     @Id
@@ -25,7 +25,7 @@ public class BlogEntity {
     }
 
     @Basic
-    @Column(name = "content", nullable = true, length = 255)
+    @Column(name = "content", nullable = true, length = -1)
     public String getContent() {
         return content;
     }
@@ -35,12 +35,12 @@ public class BlogEntity {
     }
 
     @Basic
-    @Column(name = "pub_date", nullable = false)
-    public Date getPubDate() {
+    @Column(name="pub_date", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP",insertable=false)
+    public Timestamp getPubDate() {
         return pubDate;
     }
 
-    public void setPubDate(Date pubDate) {
+    public void setPubDate(Timestamp pubDate) {
         this.pubDate = pubDate;
     }
 
