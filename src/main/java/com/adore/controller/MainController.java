@@ -1,5 +1,6 @@
 package com.adore.controller;
 
+import com.adore.constants.GlobalConstants;
 import com.adore.model.BlogEntity;
 import com.adore.model.UserEntity;
 import com.adore.repository.BlogRepository;
@@ -12,8 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.sql.Date;
-import java.util.ArrayList;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -31,8 +31,12 @@ public class MainController {
 
     //get请求 主页面
     @RequestMapping(value = "/",method = RequestMethod.GET)
-    public String index(ModelMap modelMap){
-        List<BlogEntity> blogList = blogRepository.findAll();
+    public String index(ModelMap modelMap, HttpSession session){
+        UserEntity userEntity = (UserEntity) session.getAttribute(GlobalConstants.SESSION_LOGIN_USER_NAME);
+        List<BlogEntity> blogList = null;
+        if (userEntity!=null) {
+            blogList = blogRepository.findById(userEntity.getId());
+        }
         modelMap.addAttribute("blogList", blogList);
         return "index";
     }

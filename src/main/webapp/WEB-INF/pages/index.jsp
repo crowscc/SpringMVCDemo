@@ -35,6 +35,12 @@
                     <h1>日记<small>__过往</small></h1>
                 </div>
                 <div class="col-md-12">
+                    <c:if test="${empty blogList}">
+                        <div class="alert alert-warning" role="alert">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>你还没有任何日记哦！</a>
+                        </div>
+                    </c:if>
+                    <c:if test="${!empty blogList}">
                     <c:forEach items="${blogList}" var ="blog">
                         <c:set var="date" value="${blog.pubDate}" scope="application"></c:set>
                         <%
@@ -51,7 +57,6 @@
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <div class="col-lg-12" >
-
                                         <div class="note_content">${blog.content}
                                         </div>
                                     </div>
@@ -59,6 +64,7 @@
                             </div>
                         </div>
                     </c:forEach>
+                    </c:if>
                 </div>
             </div>
         </div>

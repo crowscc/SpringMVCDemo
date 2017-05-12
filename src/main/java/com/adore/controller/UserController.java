@@ -1,5 +1,6 @@
 package com.adore.controller;
 
+import com.adore.constants.GlobalConstants;
 import com.adore.model.BlogEntity;
 import com.adore.model.UserEntity;
 import com.adore.repository.BlogRepository;
@@ -10,15 +11,16 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.annotation.PathVariable;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 
 /**
  * Created by adore on 17/5/10.
  */
 @Controller
-@SessionAttributes({"username"})
+//@SessionAttributes({"username"})
 public class UserController {
 
     @Autowired
@@ -55,9 +57,23 @@ public class UserController {
     }
 
     @RequestMapping(value = "/loginU")
-    public String loginUser(@RequestParam String username, ModelMap modelMap){
-        modelMap.addAttribute("username",username);
+    public String loginUser(@RequestParam String username, HttpServletRequest request, ModelMap modelMap){
+        HttpSession session = request.getSession();
+        UserEntity userEntity = userRepository.findName(username).get(0);
+        //modelMap.addAttribute("username",username);
+        session.setAttribute(GlobalConstants.SESSION_LOGIN_USER_NAME,userEntity);
         return "s";
     }
 
+    @RequestMapping(value = "/s")
+    public String loginTest(){
+        return "s";
+    }
+    @RequestMapping(value = "/out")
+    public String loginOut(HttpServletRequest request, ModelMap modelMap){
+        HttpSession session = request.getSession();
+        session.removeAttribute("username");
+        session.invalidate();
+        return "s";
+    }
 }

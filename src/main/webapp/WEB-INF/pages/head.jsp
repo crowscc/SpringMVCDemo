@@ -13,8 +13,8 @@
                 <li><a href="#">此刻</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">写日记</a></li>
-                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">设置<span class="caret"></span></a>
+                <li><a href="/add">写日记</a></li>
+                <li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">设置<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">个人资料设置</a></li>
                         <li><a href="#">修改密码</a></li>

@@ -8,7 +8,7 @@
     <title>成功</title>
 </head>
 <body>
-<h1>${sessionScope.username }登录成功!!!</h1>
+<h1>${sessionScope.username.nickname }登录成功!!!</h1>
 <h2>欢迎您,${sessionScope.username }</h2>
 </body>
 </html>

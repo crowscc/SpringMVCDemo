@@ -19,6 +19,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
+          <factory-entry name="Entities" />
           <factory-entry name="defaultPersistenceUnit" value="2daf75c0-b40e-47c5-88d9-0fb0ea5d20af" />
           <factory-entry name="noname-a.xml@0" value="42016bb1-2b81-42e6-ac9a-30b0409cd37e" />
         </datasource-mapping>

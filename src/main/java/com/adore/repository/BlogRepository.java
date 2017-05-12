@@ -27,5 +27,6 @@ public interface BlogRepository extends JpaRepository<BlogEntity, Integer> {
 
     //根据用户id查询名下日记
     @Query(value = "select * from blog b where b.user_id=?1", nativeQuery = true)
-    List<BlogEntity> findByName(String user_id);
+    List<BlogEntity> findById(Integer user_id);
+
 }

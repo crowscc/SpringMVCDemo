@@ -37,10 +37,11 @@
             <form role="form" action="/addN" method="post" commandName="blog">
                 <div class="form-group">
                     <label>日记</label>
+                    <label>${sessionScope.username.id}</label>
                     <textarea class="form-control" rows="10" name="content"></textarea>
                 </div>
                 <div>
-                    <input type="hidden" name="userByUserId.id" value="1">
+                    <input type="hidden" name="userByUserId.id" value=${sessionScope.username.id}>
                     <!--<input type="hidden" name="pubDate" value="2015-03-19">-->
                     <button class="btn btn-default" type="submit">写完啦</button>
                 </div>

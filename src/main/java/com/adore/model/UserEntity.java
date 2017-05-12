@@ -16,6 +16,9 @@ public class UserEntity {
     private Byte privacy;
     private Collection<BlogEntity> blogsById;
 
+    public UserEntity(){
+    }
+
     @Id
     @Column(name = "id", nullable = false)
     public int getId() {
