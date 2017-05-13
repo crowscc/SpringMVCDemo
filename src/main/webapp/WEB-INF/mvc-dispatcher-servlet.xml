@@ -24,6 +24,11 @@
         <!--<mvc:interceptor>-->
             <!--&lt;!&ndash; 拦截全部地址 &ndash;&gt;-->
             <!--<mvc:mapping path="/**"/>-->
+                <!--<mvc:exclude-mapping path="/register"/>-->
+                <!--<mvc:exclude-mapping path="/**/assets/**"/>-->
+                <!--<mvc:exclude-mapping path="/assets/**"/>-->
+                <!--<mvc:exclude-mapping path="/style/**"/>-->
+                <!--<mvc:exclude-mapping path="/co"/>-->
             <!--&lt;!&ndash; 登录拦截类 &ndash;&gt;-->
             <!--<bean id="loginInterceptor" class="com.adore.interceptor.LoginInterceptor">-->
             <!--</bean>-->

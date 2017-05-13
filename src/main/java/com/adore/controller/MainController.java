@@ -30,8 +30,8 @@ public class MainController {
     BlogRepository blogRepository;
 
     //get请求 主页面
-    @RequestMapping(value = "/",method = RequestMethod.GET)
-    public String index(ModelMap modelMap, HttpSession session){
+    @RequestMapping(value = {"/",})
+    public String indexTo(ModelMap modelMap, HttpSession session){
         UserEntity userEntity = (UserEntity) session.getAttribute(GlobalConstants.SESSION_LOGIN_USER_NAME);
         List<BlogEntity> blogList = null;
         if (userEntity!=null) {

@@ -22,8 +22,8 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 //                           @Param("qLastName") String qLastName, @Param("qPassword") String password, @Param("qId") Integer id);
 
     @Query(value = "select * from user u where u.nickname=?1", nativeQuery = true)
-    public List<UserEntity> findName(String n);
+    public UserEntity findOneByUserNickname(String nickname);
 
-
-
+    @Query(value ="select * from user u where u.email = ?1", nativeQuery = true)
+    public UserEntity findOneByUserEmail(String email);
 }

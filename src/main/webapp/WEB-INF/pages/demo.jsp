@@ -70,14 +70,14 @@
 															<input type="password" name="password" class="form-control" placeholder="Password" />
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
+														<div>${err}</div>
 													</label>
 
 													<div class="space"></div>
-
 													<div class="clearfix">
 														<label class="inline">
-															<input type="checkbox" class="ace" />
-															<span class="lbl"> 记住</span>
+															<input type="checkbox" name="remeber" class="ace" />
+															<span class="lbl"> 记住登陆</span>
 														</label>
 
 														<button type="submit" class="width-35 pull-right btn btn-sm btn-primary">
