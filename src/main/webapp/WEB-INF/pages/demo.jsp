@@ -36,7 +36,7 @@
 		<![endif]-->
 	</head>
 
-	<body class="login-layout">
+	<body>
 		<div class="main-container">
 			<div class="main-content">
 				<div class="row">
@@ -44,9 +44,7 @@
 						<div class="login-container">
 							<div class="center">
 							</div>
-
 							<div class="space-6"></div>
-
 							<div class="position-relative">
 								<div id="login-box" class="login-box visible widget-box no-border">
 									<div class="widget-body">
@@ -169,6 +167,8 @@
 															<i class="ace-icon fa fa-envelope"></i>
 														</span>
 													</label>
+													<div>${registerEmailErr}</div>
+
 
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">

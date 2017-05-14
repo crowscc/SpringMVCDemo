@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -21,6 +24,7 @@
 
     <!-- ace styles -->
     <link rel="stylesheet" href="assets/css/ace.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
 
 
     <!--[if lte IE 9]>
@@ -33,6 +37,7 @@
     <![endif]-->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <script src="assets/js/ace-extra.min.js"></script>
 
     <!--[if lt IE 9]>
     <script src="assets/js/html5shiv.min.js"></script>
@@ -41,14 +46,16 @@
 </head>
 
 <body class="login-layout light-login">
+<jsp:include page="head.jsp" />
+
 
         <!-- Brand and toggle get grouped for better mobile display -->
 
 <div class="main-container">
     <div class="main-content">
-        <div class="col-md-1">
+        <div class="col-md-2">
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
             <div class="span6">
                 <h2>
                     吾志是一个简单、私密的日记本。
@@ -57,14 +64,14 @@
                 <div class="reason">
                     <strong>私密</strong> ：完全私密的个人空间，在这里你可以安心的记录最真实的自己。
                 </div>
-
+                </br>
                 <div class="reason">
                     <strong>简单</strong> ：去繁就简，专注于提供简洁、纯粹的日记功能。
                 </div>
 
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
         <div class="row">
             <div class="col-sm-10 col-sm-offset-1">
                 <div class="login-container">
@@ -80,7 +87,7 @@
                                         请输入您的信息
                                     </h4>
                                     <div class="space-6"></div>
-                                    <form action="/loginU" method="post" commandName="user">
+                                    <form action="/loginU" method="post" commandName="user" name="loginForm" onsubmit="return validateloginForm();">
                                         <fieldset>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
@@ -185,15 +192,15 @@
                                     <div class="space-6"></div>
                                     <p>填写信息: </p>
 
-                                    <form action="/registerU" method="post" commandName="user">
+                                    <form action="/registerU" method="post" commandName="user" name="singForm" onsubmit="return validatesingupForm();">
                                         <fieldset>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="email" id="email" name="email" class="form-control" placeholder="邮箱" />
+															<input type="text" id="email" name="email" class="form-control" placeholder="邮箱" />
 															<i class="ace-icon fa fa-envelope"></i>
 														</span>
+                                                <div>${registerEmailErr}</div>
                                             </label>
-
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
 															<input type="text" id="nickname" name="nickname" class="form-control" placeholder="昵称" />
@@ -210,7 +217,7 @@
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="确认密码" />
+															<input type="password" id="passwordR" class="form-control" placeholder="确认密码" />
 															<i class="ace-icon fa fa-retweet"></i>
 														</span>
                                             </label>
@@ -227,7 +234,7 @@
                                                 </div>
                                             </label>
                                             <label class="block">
-                                                <input type="checkbox" class="ace" />
+                                                <input type="checkbox" class="ace" name="accept" />
                                                 <span class="lbl">
 															接受
 															<a href="#">用户协议</a>
@@ -266,7 +273,7 @@
         </div><!-- /.row -->
         </div>
     </div><!-- /.main-content -->
-    <div class="col-md-1">
+    <div class="col-md-2">
     </div>
 </div><!-- /.main-container -->
 
@@ -298,8 +305,50 @@
 </script>
 
 <script type="text/javascript">
+    function validateloginForm(){
+        var x=document.forms["loginForm"]["username"].value;
+        var atpos=x.indexOf("@");
+        var dotpos=x.lastIndexOf(".");
+        if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length){
+            alert("e-mail 地址错误，请重新输入");
+            return false;
+        }
+        var x=document.forms["loginForm"]["password"].value;
+        if (x==null || x=="")
+        {
+            alert("密码不能为空");
+            return false;
+        }
+    }
 
+    function validatesingupForm() {
 
+        var x=document.forms["singForm"]["email"].value;
+        var atpos=x.indexOf("@");
+        var dotpos=x.lastIndexOf(".");
+        if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length){
+            alert("e-mail 地址错误，请重新输入");
+            return false;
+        }
+        var x=document.forms["singForm"]["password"].value;
+
+        if (x==null || x=="")
+        {
+            alert("密码不能为空");
+            return false;
+        }
+        var pwd1=document.forms["singForm"]["password"].value;
+        var pwd2=document.forms["singForm"]["passwordR"].value;
+        if (pwd1!=pwd2){
+            alert("两次输入的密码不一致")
+            return false;
+        }
+        var accept=document.forms["singForm"]["accept"].checked;
+        if (accept==false ){
+            alert("未接受用户协议");
+            return false;
+        }
+    }
 </script>
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
@@ -312,7 +361,32 @@
         });
     });
 </script>
+
+<script type="text/javascript">
+    //init method one
+    $(document).ready(function(){
+        if (${boxTar} == '1'){
+            $('.widget-box.visible').removeClass('visible');//hide others
+            $('#signup-box').addClass('visible');//show target
+            }
+    });
+</script>
 <div style="text-align:center;">
 </div>
+<script type="text/javascript">
+    if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/typeahead-bs2.min.js"></script>
+
+<!-- page specific plugin scripts -->
+
+<!-- ace scripts -->
+
+<script src="assets/js/ace-elements.min.js"></script>
+<script src="assets/js/ace.min.js"></script>
+
+<!-- inline scripts related to this page -->
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>

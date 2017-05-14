@@ -41,29 +41,29 @@
                         </div>
                     </c:if>
                     <c:if test="${!empty blogList}">
-                    <c:forEach items="${blogList}" var ="blog">
-                        <c:set var="date" value="${blog.pubDate}" scope="application"></c:set>
-                        <%
-                            Timestamp date = (Timestamp) application.getAttribute("date");
-                            String[] info = date.toString().split(" ");
-                            String[] NYR = info[0].split("-");
-                            String[] SJ = info[1].split(":");
-                        %>
-                        <div class="col-md-1">
-                            <!--时间-->
-                            <div class="date"><span><%=NYR[1]%></span><%=NYR[2]%></div>
-                        </div>
-                        <div class="col-md-11">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <div class="col-lg-12" >
-                                        <div class="note_content">${blog.content}
+                        <c:forEach items="${blogList}" var ="blog">
+                            <c:set var="date" value="${blog.pubDate}" scope="application"></c:set>
+                            <%
+                                Timestamp date = (Timestamp) application.getAttribute("date");
+                                String[] info = date.toString().split(" ");
+                                String[] NYR = info[0].split("-");
+                                String[] SJ = info[1].split(":");
+                            %>
+                            <div class="col-md-1">
+                                <!--时间-->
+                                <div class="date"><span><%=NYR[1]%></span><%=NYR[2]%></div>
+                            </div>
+                            <div class="col-md-11">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="col-lg-12" >
+                                            <div class="note_content">${blog.content}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </c:forEach>
+                        </c:forEach>
                     </c:if>
                 </div>
             </div>

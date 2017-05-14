@@ -20,20 +20,19 @@
     <mvc:annotation-driven/>
 
     <!-- 拦截器 -->
-    <!--<mvc:interceptors>-->
-        <!--<mvc:interceptor>-->
-            <!--&lt;!&ndash; 拦截全部地址 &ndash;&gt;-->
-            <!--<mvc:mapping path="/**"/>-->
-                <!--<mvc:exclude-mapping path="/register"/>-->
-                <!--<mvc:exclude-mapping path="/**/assets/**"/>-->
-                <!--<mvc:exclude-mapping path="/assets/**"/>-->
-                <!--<mvc:exclude-mapping path="/style/**"/>-->
-                <!--<mvc:exclude-mapping path="/co"/>-->
-            <!--&lt;!&ndash; 登录拦截类 &ndash;&gt;-->
-            <!--<bean id="loginInterceptor" class="com.adore.interceptor.LoginInterceptor">-->
-            <!--</bean>-->
-        <!--</mvc:interceptor>-->
-    <!--</mvc:interceptors>-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 拦截全部地址 -->
+            <mvc:mapping path="/**"/>
+                <mvc:exclude-mapping path="/**/assets/**"/>
+                <mvc:exclude-mapping path="/assets/**"/>
+                <mvc:exclude-mapping path="/style/**"/>
+                <mvc:exclude-mapping path="/noLogin"/>
+            <!-- 登录拦截类 -->
+            <bean id="loginInterceptor" class="com.adore.interceptor.LoginInterceptor">
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
     <!--ViewResolver 视图解析器-->
     <!--用于支持Servlet、JSP视图解析-->

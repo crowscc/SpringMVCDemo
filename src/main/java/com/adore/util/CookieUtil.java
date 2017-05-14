@@ -17,15 +17,15 @@ public class CookieUtil {
         int timeout = 7 * 24 * 60 * 60;
         // 把帐号保存到Cookie中 并控制有效期
         Cookie accountCookie = new Cookie("account", account);
-        //accountCookie.setDomain(".adorecorw.cn");           // 设置域名
-        accountCookie.setDomain("localhost");           // 设置域名
+        accountCookie.setDomain(".adorecorw.cn");           // 设置域名
+        //accountCookie.setDomain("localhost");           // 设置域名
         accountCookie.setPath("/");                                // 设置路径
         accountCookie.setMaxAge(timeout);
 
         // 把加密结果保存到Cookie中 并控制有效期
         Cookie ssidCookie = new Cookie("ssid", ssid);
-        //ssidCookie.setDomain(".adorecorw.cn");           // 设置域名
-        ssidCookie.setDomain("localhost");           // 设置域名
+        ssidCookie.setDomain(".adorecorw.cn");           // 设置域名
+        //ssidCookie.setDomain("localhost");           // 设置域名
         ssidCookie.setPath("/");                              // 设置路径
         ssidCookie.setMaxAge(timeout);
 
@@ -38,16 +38,16 @@ public class CookieUtil {
     public final static boolean logoutRemove(HttpServletRequest request, HttpServletResponse response) {
         // 删除Cookie中的帐号
         Cookie accountCookie = new Cookie("account", "");
-        //accountCookie.setDomain(".adorecorw.cn");           // 设置域名
-        accountCookie.setDomain("localhost");           // 设置域名
+        accountCookie.setDomain(".adorecorw.cn");           // 设置域名
+        //accountCookie.setDomain("localhost");           // 设置域名
 
         accountCookie.setPath("/");                              // 设置路径
         accountCookie.setMaxAge(0);
 
         // 删除Cookie中的加密结果
         Cookie ssidCookie = new Cookie("ssid", "");
-        //ssidCookie.setDomain(".adorecorw.cn");           // 设置域名
-        ssidCookie.setDomain("localhost");           // 设置域名
+        ssidCookie.setDomain(".adorecorw.cn");           // 设置域名
+        //ssidCookie.setDomain("localhost");           // 设置域名
         ssidCookie.setPath("/");                              // 设置路径
         ssidCookie.setMaxAge(0);
 

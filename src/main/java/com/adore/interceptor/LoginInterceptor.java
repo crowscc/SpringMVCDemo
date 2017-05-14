@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -25,17 +26,20 @@ public class LoginInterceptor implements HandlerInterceptor {
     protected Logger log = Logger.getLogger(getClass());
 
     @Override
-    public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        HttpSession session = httpServletRequest.getSession();
-        String[] ingoreUrls = new String[]{"/login", "/register"};
-        String url = httpServletRequest.getRequestURI().toString();
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
+        HttpSession session = request.getSession(true);
+        String[] ingoreUrls = new String[]{"/noLoginHome"};
+        String url = request.getRequestURI().toString();
         UserEntity userEntity = (UserEntity) session.getAttribute(GlobalConstants.SESSION_LOGIN_USER_NAME);
+        if (userEntity!=null){
+            return true;
+        }
         for (String ingoreUrl : ingoreUrls) {
             if (url.contains(ingoreUrl)) {
                 return true;
             }
         }
-        Cookie[] cookies = httpServletRequest.getCookies();
+        Cookie[] cookies = request.getCookies();
         boolean login = false;                        // 是否登录
         String account = null;                        // 账号
         String ssid = null;                           // SSID标识
@@ -50,11 +54,12 @@ public class LoginInterceptor implements HandlerInterceptor {
         if(account != null && ssid !=null){    // 如果account、SSID都不为空
             login =ssid.equals(SecretUtil.calcMD5(account));
             userEntity =userRepository.findOneByUserNickname(account);
-            session.setAttribute(GlobalConstants.SESSION_LOGIN_USER_NAME, userEntity);
+            WebUtils.setSessionAttribute(request,GlobalConstants.SESSION_LOGIN_USER_NAME,userEntity);
+            //session.setAttribute(GlobalConstants.SESSION_LOGIN_USER_NAME, userEntity);
             // 如果加密规则正确, 则视为已经登录
         }
         if (userEntity == null){
-           httpServletResponse.sendRedirect(httpServletRequest.getContextPath()+"/register");
+            response.sendRedirect(request.getContextPath()+"/noLogin");
         }
         return true;
     }

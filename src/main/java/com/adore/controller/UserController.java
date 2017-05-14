@@ -12,6 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,30 +46,37 @@ public class UserController {
         // 重定向地址
         return "redirect:/";
     }
-    @RequestMapping(value = "/register")
-    public String register(){
-        return "demo";
-    }
 
     @RequestMapping(value = "/registerU")
-    public String register(@ModelAttribute("user")UserEntity userEntity){
+    public String register(@ModelAttribute("user")UserEntity userEntity, ModelMap modelMap,HttpServletRequest request, HttpServletResponse response){
         System.out.println(userRepository.findOneByUserNickname(userEntity.getNickname()));
-        userRepository.saveAndFlush(userEntity);
-        return "demo";
+        String eamil = userEntity.getEmail();
+        HttpSession session = request.getSession(false);
+        if (userRepository.findOneByUserEmail(eamil) == null){
+            userRepository.saveAndFlush(userEntity);
+            WebUtils.setSessionAttribute(request,GlobalConstants.SESSION_LOGIN_USER_NAME,userEntity);
+            //session.setAttribute(GlobalConstants.SESSION_LOGIN_USER_NAME,userEntity);
+            CookieUtil.setLoginCookie(eamil,response);
+        }else {
+            modelMap.addAttribute("registerEmailErr","该邮箱已被注册，请重新输入或找回密码");
+            modelMap.addAttribute("boxTar","1");
+            return "noLoginHome";
+        }
+        return "forward:/";
     }
 
     @RequestMapping(value = "/loginU")
-        public String loginUser(@RequestParam String username, @RequestParam String password, @RequestParam(defaultValue = "false") boolean remeber, HttpServletRequest request,HttpServletResponse response, ModelMap modelMap){
-        HttpSession session = request.getSession(false);
-        UserEntity userEntity = userRepository.findOneByUserNickname(username);
+    public String loginUser(@RequestParam String username, @RequestParam String password, @RequestParam(defaultValue = "false") boolean remeber, HttpServletRequest request,HttpServletResponse response, ModelMap modelMap){
+        //HttpSession session = request.getSession(false);
+        UserEntity userEntity = userRepository.findOneByUserEmail(username);
         System.out.println(remeber);
         if (userEntity == null){
             modelMap.addAttribute("err","输入的邮箱不存在，请重新输入");
         }else {
-
             //如果验证成功就保存session和cookie并跳转
             if (userEntity.getPassword().equals(password)){
-                session.setAttribute(GlobalConstants.SESSION_LOGIN_USER_NAME,userEntity);
+                WebUtils.setSessionAttribute(request,GlobalConstants.SESSION_LOGIN_USER_NAME,userEntity);
+                //session.setAttribute(GlobalConstants.SESSION_LOGIN_USER_NAME,userEntity);
                 CookieUtil.setLoginCookie(username,response);
                 /*
                 *   这里通过forward跳转到另外一个controller
@@ -83,16 +91,12 @@ public class UserController {
             }
         }
         //modelMap.addAttribute("username",username);
-        return "demo";
+        return "noLoginHome";
     }
 
-    @RequestMapping(value = "/s")
-    public String loginTest(){
-        return "s";
-    }
-    @RequestMapping(value = "/t")
+    @RequestMapping(value = "/noLogin")
     public String loginTestt(){
-        return "test";
+        return "noLoginHome";
     }
 
     @RequestMapping(value = "/out")
@@ -100,7 +104,7 @@ public class UserController {
 
         CookieUtil.logoutRemove(request,response);
         // 重新请求本页面
-        return "s";
+        return "noLoginHome";
     }
 
 }
